@@ -17,7 +17,7 @@ const questions = [
   },
   {
     question: '¿Puedo completar la compra ahora?',
-    answer: 'Todavía no. El checkout está en preparación y no recoge pagos ni registra pedidos.',
+    answer: 'Sí. Puedes tramitar tu pedido directamente desde el botón "Ver Ofertas" con envío express 24/48h a toda España y opción de pago contra reembolso al recibir el paquete.',
   },
 ];
 

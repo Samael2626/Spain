@@ -1682,8 +1682,225 @@ html, body {
 .offer-total { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border-fine); }
 .offer-total span { color: var(--text-subtle); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; }
 .offer-total strong { color: #fff; font-size: 28px; letter-spacing: -0.04em; }
-.offer-checkout { width: 100%; min-height: 50px; display: flex; justify-content: center; align-items: center; gap: 9px; margin-top: 16px; background: var(--accent-amber); border: 0; color: #0b0d11; font: inherit; font-size: 12px; font-weight: 800; letter-spacing: 0.06em; }
-.offer-checkout:disabled { opacity: 0.55; cursor: not-allowed; }
+.offer-checkout {
+  width: 100%;
+  min-height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+  margin-top: 16px;
+  background: var(--accent-amber);
+  border: 0;
+  color: #0b0d11;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: transform 0.18s ease, filter 0.18s ease;
+}
+.offer-checkout:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+}
+.offer-checkout:active {
+  transform: scale(0.98);
+}
+.offer-checkout:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+.offer-trust-badges {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 12px;
+  color: var(--text-subtle);
+  font-size: 11px;
+}
+.offer-trust-badges span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.offer-trust-badges svg {
+  color: var(--accent-amber);
+}
+
+/* Step 2: Shipping Form */
+.back-step-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-subtle);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: 12px;
+  border-radius: 4px;
+  transition: color 0.18s ease, border-color 0.18s ease;
+}
+.back-step-btn:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+.checkout-summary-pill {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: 4px;
+  margin: 12px 0 16px;
+  font-size: 12px;
+}
+.checkout-summary-pill strong {
+  color: var(--accent-amber);
+  font-size: 15px;
+}
+.checkout-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.checkout-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.checkout-form label {
+  color: var(--text-subtle);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.checkout-form input[type="text"],
+.checkout-form input[type="tel"] {
+  width: 100%;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 4px;
+  color: #fff;
+  font: inherit;
+  font-size: 13px;
+  transition: border-color 0.18s ease, background 0.18s ease;
+}
+.checkout-form input:focus {
+  border-color: var(--accent-amber);
+  background: rgba(255, 255, 255, 0.08);
+  outline: none;
+}
+.checkout-form .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.payment-options {
+  display: grid;
+  gap: 8px;
+  margin-top: 4px;
+}
+.payment-option {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: border-color 0.18s ease, background 0.18s ease;
+}
+.payment-option input {
+  margin-top: 3px;
+  accent-color: var(--accent-amber);
+}
+.payment-option.selected {
+  border-color: var(--accent-amber);
+  background: rgba(245, 158, 11, 0.08);
+}
+.payment-option strong {
+  display: block;
+  color: #fff;
+  font-size: 12px;
+}
+.payment-option small {
+  display: block;
+  color: var(--text-muted);
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+/* Step 3: Order Confirmed */
+.order-confirmed-view {
+  text-align: center;
+  padding: 10px 0;
+}
+.confirmed-icon-wrap {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 14px;
+  display: grid;
+  place-items: center;
+  background: rgba(16, 185, 129, 0.15);
+  border: 2px solid #10b981;
+  color: #10b981;
+  border-radius: 50%;
+}
+.order-ref-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px dashed rgba(255, 255, 255, 0.25);
+  border-radius: 4px;
+  margin: 12px 0 16px;
+  font-size: 11px;
+  color: var(--text-subtle);
+}
+.order-ref-badge strong {
+  color: var(--accent-amber);
+  font-size: 13px;
+  margin-left: 6px;
+}
+.order-details-box {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  padding: 14px;
+  margin-bottom: 16px;
+  text-align: left;
+  display: grid;
+  gap: 8px;
+}
+.order-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+.order-line span {
+  color: var(--text-muted);
+}
+.order-line strong {
+  color: #fff;
+  text-align: right;
+}
+.order-next-steps {
+  color: var(--text-subtle);
+  font-size: 12px;
+  line-height: 1.5;
+  margin-bottom: 18px;
+}
 .offer-disclosure { margin-top: 10px; color: var(--text-muted); font-size: 11px; line-height: 1.45; text-align: center; }
 @media (max-width: 700px) {
   .offer-modal { display: block; }

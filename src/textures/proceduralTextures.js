@@ -8,13 +8,13 @@ import * as THREE from 'three';
  */
 export function createCamoTexture() {
   const canvas = document.createElement('canvas');
-  canvas.width = 2048;
-  canvas.height = 2048;
+  canvas.width = 1024;
+  canvas.height = 1024;
   const ctx = canvas.getContext('2d');
 
   // 1. Deep Volcanic Slate Base
   ctx.fillStyle = '#1c2026';
-  ctx.fillRect(0, 0, 2048, 2048);
+  ctx.fillRect(0, 0, 1024, 1024);
 
   // 2. High-Fidelity Tactical Multicam Layers
   const camoColors = [
@@ -29,16 +29,16 @@ export function createCamoTexture() {
   // Geometric multi-angle polygon clusters (Military Splinter/Multicam pattern)
   camoColors.forEach((color, layerIdx) => {
     ctx.fillStyle = color;
-    const numPatches = 18 + layerIdx * 6;
+    const numPatches = 14 + layerIdx * 4;
 
     for (let i = 0; i < numPatches; i++) {
       ctx.beginPath();
-      let startX = (i * 137.5 + layerIdx * 211) % 2048;
-      let startY = ((i * 389 + layerIdx * 541) % 2048);
+      let startX = (i * 68.75 + layerIdx * 105.5) % 1024;
+      let startY = ((i * 194.5 + layerIdx * 270.5) % 1024);
       ctx.moveTo(startX, startY);
 
       const numVertices = 7 + (i % 6);
-      const baseRadius = 120 + ((i * 47) % 180);
+      const baseRadius = 60 + ((i * 23) % 90);
 
       for (let v = 0; v < numVertices; v++) {
         const angle = (v / numVertices) * Math.PI * 2;
@@ -54,92 +54,82 @@ export function createCamoTexture() {
     }
   });
 
-  // 3. Tactical Ripstop Grid Weave (Micro cross-hatch reinforcement threads)
+  // 3. Tactical Ripstop Grid Weave
   ctx.strokeStyle = 'rgba(255, 255, 255, 0.035)';
-  ctx.lineWidth = 1.5;
+  ctx.lineWidth = 1.0;
   const gridSize = 16;
-  for (let x = 0; x < 2048; x += gridSize) {
+  for (let x = 0; x < 1024; x += gridSize) {
     ctx.beginPath();
     ctx.moveTo(x, 0);
-    ctx.lineTo(x, 2048);
+    ctx.lineTo(x, 1024);
     ctx.stroke();
   }
-  for (let y = 0; y < 2048; y += gridSize) {
+  for (let y = 0; y < 1024; y += gridSize) {
     ctx.beginPath();
     ctx.moveTo(0, y);
-    ctx.lineTo(2048, y);
+    ctx.lineTo(1024, y);
     ctx.stroke();
   }
 
-  // 4. Horizontal MOLLE Webbing Bands with Double Bar-Tack Stitching
-  const molleBands = [480, 880, 1280];
+  // 4. Horizontal MOLLE Webbing Bands
+  const molleBands = [240, 440, 640];
   molleBands.forEach((bandY) => {
-    // Nylon webbing strip
     ctx.fillStyle = 'rgba(15, 18, 23, 0.78)';
-    ctx.fillRect(0, bandY, 2048, 110);
+    ctx.fillRect(0, bandY, 1024, 55);
 
-    // Subtle edge highlight and shadow
     ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 1.5;
     ctx.beginPath();
     ctx.moveTo(0, bandY);
-    ctx.lineTo(2048, bandY);
+    ctx.lineTo(1024, bandY);
     ctx.stroke();
 
     ctx.strokeStyle = 'rgba(0, 0, 0, 0.45)';
     ctx.beginPath();
-    ctx.moveTo(0, bandY + 110);
-    ctx.lineTo(2048, bandY + 110);
+    ctx.moveTo(0, bandY + 55);
+    ctx.lineTo(1024, bandY + 55);
     ctx.stroke();
 
-    // Bar-tack tactical reinforcement stitches every 180px
-    for (let x = 60; x < 2048; x += 180) {
-      ctx.fillStyle = '#f59e0b'; // Amber thread
-      ctx.fillRect(x, bandY + 6, 8, 98);
+    for (let x = 30; x < 1024; x += 90) {
+      ctx.fillStyle = '#f59e0b';
+      ctx.fillRect(x, bandY + 3, 4, 49);
       ctx.fillStyle = '#0a0c10';
-      ctx.fillRect(x + 2, bandY + 8, 4, 94);
+      ctx.fillRect(x + 1, bandY + 4, 2, 47);
     }
   });
 
-  // 5. Molded Tactical Rubber Brand Patch (Centered on sleeve)
+  // 5. Molded Tactical Rubber Brand Patch
   ctx.save();
-  ctx.translate(1024, 1580);
+  ctx.translate(512, 790);
 
-  // Outer bezel with stitched border
   ctx.fillStyle = '#0d0f14';
   ctx.strokeStyle = 'rgba(245, 158, 11, 0.6)';
-  ctx.lineWidth = 5;
+  ctx.lineWidth = 3;
   ctx.beginPath();
-  ctx.roundRect(-360, -130, 720, 260, 24);
+  ctx.roundRect(-180, -65, 360, 130, 12);
   ctx.fill();
   ctx.stroke();
 
-  // Inner recessed tray
   ctx.fillStyle = '#141820';
   ctx.beginPath();
-  ctx.roundRect(-340, -110, 680, 220, 16);
+  ctx.roundRect(-170, -55, 340, 110, 8);
   ctx.fill();
 
-  // Primary Brand Typography
   ctx.fillStyle = '#ffffff';
-  ctx.font = '800 84px "Plus Jakarta Sans", sans-serif';
+  ctx.font = '800 42px "Plus Jakarta Sans", sans-serif';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.letterSpacing = '6px';
-  ctx.fillText('JIMKEG', 0, -28);
+  ctx.fillText('JIMKEG', 0, -14);
 
-  // Sub-badge specification
   ctx.fillStyle = '#f59e0b';
-  ctx.font = '700 24px "Plus Jakarta Sans", sans-serif';
-  ctx.letterSpacing = '5px';
-  ctx.fillText('TACTICAL 2.2L • HYDRATION JUG', 0, 48);
+  ctx.font = '700 12px "Plus Jakarta Sans", sans-serif';
+  ctx.fillText('TACTICAL 2.2L • HYDRATION JUG', 0, 24);
 
-  // Subtle crosshair & technical markings
   ctx.strokeStyle = 'rgba(245, 158, 11, 0.35)';
-  ctx.lineWidth = 2;
+  ctx.lineWidth = 1;
   ctx.beginPath();
-  ctx.moveTo(-280, 84);
-  ctx.lineTo(280, 84);
+  ctx.moveTo(-140, 42);
+  ctx.lineTo(140, 42);
   ctx.stroke();
 
   ctx.restore();
@@ -153,88 +143,86 @@ export function createCamoTexture() {
 
 /**
  * Stealth Obsidian Black Tactical Texture with Carbon Honeycomb Weave
- * Resolution: 2048x2048
+ * Resolution: 1024x1024
  */
 export function createBlackStealthTexture() {
   const canvas = document.createElement('canvas');
-  canvas.width = 2048;
-  canvas.height = 2048;
+  canvas.width = 1024;
+  canvas.height = 1024;
   const ctx = canvas.getContext('2d');
 
   // 1. Deep Matte Obsidian Base
   ctx.fillStyle = '#111317';
-  ctx.fillRect(0, 0, 2048, 2048);
+  ctx.fillRect(0, 0, 1024, 1024);
 
   // 2. Micro Carbon Grid
   ctx.strokeStyle = 'rgba(255, 255, 255, 0.03)';
-  ctx.lineWidth = 1.5;
+  ctx.lineWidth = 1.0;
   const step = 14;
-  for (let x = 0; x < 2048; x += step) {
+  for (let x = 0; x < 1024; x += step) {
     ctx.beginPath();
     ctx.moveTo(x, 0);
-    ctx.lineTo(x, 2048);
+    ctx.lineTo(x, 1024);
     ctx.stroke();
   }
-  for (let y = 0; y < 2048; y += step) {
+  for (let y = 0; y < 1024; y += step) {
     ctx.beginPath();
     ctx.moveTo(0, y);
-    ctx.lineTo(2048, y);
+    ctx.lineTo(1024, y);
     ctx.stroke();
   }
 
   // 3. Tactical Molle Bands
-  const molleBands = [480, 880, 1280];
+  const molleBands = [240, 440, 640];
   molleBands.forEach((bandY) => {
     ctx.fillStyle = '#0c0d10';
-    ctx.fillRect(0, bandY, 2048, 110);
+    ctx.fillRect(0, bandY, 1024, 55);
 
     ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 1.5;
     ctx.beginPath();
     ctx.moveTo(0, bandY);
-    ctx.lineTo(2048, bandY);
+    ctx.lineTo(1024, bandY);
     ctx.stroke();
 
-    for (let x = 60; x < 2048; x += 180) {
+    for (let x = 30; x < 1024; x += 90) {
       ctx.fillStyle = '#262a33';
-      ctx.fillRect(x, bandY + 6, 8, 98);
+      ctx.fillRect(x, bandY + 3, 4, 49);
     }
   });
 
   // 4. Stealth Matte Rubber Patch
   ctx.save();
-  ctx.translate(1024, 1580);
+  ctx.translate(512, 790);
 
   ctx.fillStyle = '#0a0b0e';
   ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
-  ctx.lineWidth = 5;
+  ctx.lineWidth = 3;
   ctx.beginPath();
-  ctx.roundRect(-360, -130, 720, 260, 24);
+  ctx.roundRect(-180, -65, 360, 130, 12);
   ctx.fill();
   ctx.stroke();
 
   ctx.fillStyle = '#14161c';
   ctx.beginPath();
-  ctx.roundRect(-340, -110, 680, 220, 16);
+  ctx.roundRect(-170, -55, 340, 110, 8);
   ctx.fill();
 
   ctx.fillStyle = '#f8fafc';
-  ctx.font = '800 84px "Plus Jakarta Sans", sans-serif';
+  ctx.font = '800 42px "Plus Jakarta Sans", sans-serif';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.letterSpacing = '6px';
-  ctx.fillText('JIMKEG', 0, -28);
+  ctx.fillText('JIMKEG', 0, -14);
 
   ctx.fillStyle = '#94a3b8';
-  ctx.font = '700 24px "Plus Jakarta Sans", sans-serif';
-  ctx.letterSpacing = '5px';
-  ctx.fillText('OBSIDIAN SPEC • 2200 ML', 0, 48);
+  ctx.font = '700 12px "Plus Jakarta Sans", sans-serif';
+  ctx.fillText('OBSIDIAN SPEC • 2200 ML', 0, 24);
 
   ctx.strokeStyle = 'rgba(255, 255, 255, 0.18)';
-  ctx.lineWidth = 2;
+  ctx.lineWidth = 1;
   ctx.beginPath();
-  ctx.moveTo(-280, 84);
-  ctx.lineTo(280, 84);
+  ctx.moveTo(-140, 42);
+  ctx.lineTo(140, 42);
   ctx.stroke();
 
   ctx.restore();
@@ -283,54 +271,54 @@ export function createNeopreneBumpTexture() {
  */
 export function createMeasurementTexture() {
   const canvas = document.createElement('canvas');
-  canvas.width = 1024;
-  canvas.height = 2048;
+  canvas.width = 512;
+  canvas.height = 1024;
   const ctx = canvas.getContext('2d');
 
-  ctx.clearRect(0, 0, 1024, 2048);
+  ctx.clearRect(0, 0, 512, 1024);
 
   const marks = [
-    { y: 360, ml: '2200 ML', oz: '74 OZ', text: '08:00 · INICIO DE JORNADA' },
-    { y: 680, ml: '1750 ML', oz: '59 OZ', text: '11:00 · MANTÉN EL RITMO' },
-    { y: 1000, ml: '1250 ML', oz: '42 OZ', text: '14:00 · MITAD DEL DÍA' },
-    { y: 1320, ml: '750 ML', oz: '25 OZ', text: '17:00 · CASI LO LOGRAS' },
-    { y: 1640, ml: '250 ML', oz: '8 OZ', text: '20:00 · META CUMPLIDA' },
+    { y: 180, ml: '2200 ML', oz: '74 OZ', text: '08:00 · INICIO DE JORNADA' },
+    { y: 340, ml: '1750 ML', oz: '59 OZ', text: '11:00 · MANTÉN EL RITMO' },
+    { y: 500, ml: '1250 ML', oz: '42 OZ', text: '14:00 · MITAD DEL DÍA' },
+    { y: 660, ml: '750 ML', oz: '25 OZ', text: '17:00 · CASI LO LOGRAS' },
+    { y: 820, ml: '250 ML', oz: '8 OZ', text: '20:00 · META CUMPLIDA' },
   ];
 
   ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
   ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
-  ctx.lineWidth = 5;
+  ctx.lineWidth = 3;
 
   marks.forEach((m) => {
     // Primary tick
     ctx.beginPath();
-    ctx.moveTo(60, m.y);
-    ctx.lineTo(160, m.y);
+    ctx.moveTo(30, m.y);
+    ctx.lineTo(80, m.y);
     ctx.stroke();
 
     // Intermediate sub-ticks
-    for (let offset = 60; offset < 300; offset += 60) {
-      if (m.y + offset < 1900) {
+    for (let offset = 30; offset < 150; offset += 30) {
+      if (m.y + offset < 950) {
         ctx.beginPath();
-        ctx.moveTo(60, m.y + offset);
-        ctx.lineTo(110, m.y + offset);
+        ctx.moveTo(30, m.y + offset);
+        ctx.lineTo(55, m.y + offset);
         ctx.stroke();
       }
     }
 
     // Typography
-    ctx.font = '800 42px "Plus Jakarta Sans", sans-serif';
+    ctx.font = '800 24px "Plus Jakarta Sans", sans-serif';
     ctx.textAlign = 'left';
     ctx.fillStyle = '#ffffff';
-    ctx.fillText(m.ml, 190, m.y - 6);
+    ctx.fillText(m.ml, 95, m.y - 3);
 
-    ctx.font = '600 24px "Plus Jakarta Sans", sans-serif';
+    ctx.font = '600 14px "Plus Jakarta Sans", sans-serif';
     ctx.fillStyle = '#f59e0b';
-    ctx.fillText(m.oz, 410, m.y - 6);
+    ctx.fillText(m.oz, 220, m.y - 3);
 
-    ctx.font = '500 24px "Plus Jakarta Sans", sans-serif';
+    ctx.font = '500 13px "Plus Jakarta Sans", sans-serif';
     ctx.fillStyle = 'rgba(255, 255, 255, 0.65)';
-    ctx.fillText(m.text, 190, m.y + 36);
+    ctx.fillText(m.text, 95, m.y + 20);
   });
 
   const texture = new THREE.CanvasTexture(canvas);

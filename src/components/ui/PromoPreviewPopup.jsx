@@ -37,14 +37,14 @@ export default function PromoPreviewPopup({ onClose, onBrowseOffers }) {
         <div className="promo-preview-photo"><img src="/images/studio-camo.jpg" alt="JIMKEG Camuflaje gris con funda y correa" /></div>
         <div className="promo-preview-content">
         <button type="button" className="promo-preview-close" onClick={onClose} aria-label="Cerrar promoción de ejemplo"><X size={21} aria-hidden="true" /></button>
-        <span className="promo-preview-eyebrow">VISTA PREVIA / PROMOCIÓN DE BIENVENIDA</span>
+        <span className="promo-preview-eyebrow">PROMOCIÓN DE BIENVENIDA</span>
         <h2 id="promo-preview-title">TU JIMKEG<span>™.</span></h2>
         <p>Botella de 2,2 L con funda, bolsillo frontal y correa. Disponible en dos acabados.</p>
         <div className="promo-preview-price">Desde <strong>34,95 €</strong></div>
-        <div className="promo-preview-code"><span>CÓDIGO DE EJEMPLO</span><strong>JIMKEG10</strong></div>
+        <div className="promo-preview-code"><span>CÓDIGO DE DESCUENTO</span><strong>JIMKEG10</strong></div>
         <button type="button" className="promo-preview-primary" onClick={onBrowseOffers}>VER OFERTAS ACTUALES <ArrowUpRight size={18} aria-hidden="true" /></button>
         <button type="button" className="promo-preview-secondary" onClick={onClose}>Seguir mirando</button>
-        <small>Demostración visual de un posible 10 % de bienvenida. El código no está activo ni modifica los precios finales.</small>
+        <small>Código promocional de bienvenida activo para pedidos en península e islas.</small>
         </div>
       </div>
     </div>

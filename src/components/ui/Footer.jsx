@@ -22,7 +22,7 @@ export default function Footer() {
             <h2 className="footer-heading">INFORMACIÓN</h2>
             <ul>
               <li><a href="#preguntas">Preguntas frecuentes</a></li>
-              <li><span>Compra en preparación</span></li>
+              <li><span>Envíos 24/48h a toda España</span></li>
             </ul>
           </div>
         </div>

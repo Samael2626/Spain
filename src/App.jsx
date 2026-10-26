@@ -59,7 +59,7 @@ export default function App() {
         setStudioReady(true);
         observer.disconnect();
       }
-    }, { rootMargin: '400px 0px' });
+    }, { rootMargin: '80px 0px' });
     observer.observe(target);
     return () => observer.disconnect();
   }, []);
