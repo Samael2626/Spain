@@ -21,7 +21,7 @@ export default function ExplodedDetailPanel({ onClose }) {
       </header>
       <div className="exploded-layout">
         <div className="exploded-art">
-          <img src="/images/jimkeg-exploded-concept.png" alt="Ilustración conceptual de tapa, botella, funda de camuflaje y correa separadas" />
+          <img src="/images/jimkeg-exploded-concept.webp" loading="lazy" decoding="async" alt="Ilustración conceptual de tapa, botella, funda de camuflaje y correa separadas" />
           <span>DESPIECE / CAMUFLAJE GRIS</span>
         </div>
         <div className="exploded-parts" aria-label="Componentes de la botella">

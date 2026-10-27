@@ -411,20 +411,24 @@ export default function JimkegViewer({ activeColor = 'black', onColorChange = ()
           shadows
           dpr={isMobile ? [1, 1.5] : [1, 2]}
           camera={{ position: CAM_HOME.toArray(), fov: 38 }}
-          gl={{ antialias: true, alpha: true, powerPreference: 'high-performance', toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.05 }}
+          gl={{ antialias: true, alpha: true, powerPreference: 'high-performance', toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.2 }}
           onPointerMissed={() => { if (selected) closeCard(); }}
         >
           {/* Estudio ambar de marca */}
-          <ambientLight intensity={0.22} color="#f3e4cf" />
-          <directionalLight position={[4, 9, 6]} intensity={1.15} castShadow shadow-mapSize-width={2048} shadow-mapSize-height={2048} shadow-bias={-0.0001} />
-          <directionalLight position={[-6, 3, -4]} intensity={1.1} color="#ffb347" />
-          <directionalLight position={[6, 3, -4]} intensity={0.7} color="#cfd8e8" />
-          <directionalLight position={[-4, 1, 4]} intensity={0.3} color="#f59e0b" />
+          <ambientLight intensity={0.3} color="#f3e4cf" />
+          <hemisphereLight args={['#fff4e6', '#3a2410', 0.3]} />
+          <directionalLight position={[4, 9, 6]} intensity={1.6} castShadow shadow-mapSize-width={2048} shadow-mapSize-height={2048} shadow-bias={-0.0001} />
+          {/* luz frontal: sin ella la cara visible queda en sombra */}
+          <directionalLight position={[0.5, 2.5, 8]} intensity={1.1} color="#fff1dd" />
+          <directionalLight position={[-6, 3, -4]} intensity={1.3} color="#ffb347" />
+          <directionalLight position={[6, 3, -4]} intensity={0.9} color="#cfd8e8" />
+          <directionalLight position={[-4, 1, 4]} intensity={0.5} color="#f59e0b" />
           <Environment resolution={256}>
-            <Lightformer intensity={0.7} position={[0, 5, 3]} scale={[7, 2, 1]} color="#fff4e6" />
-            <Lightformer intensity={1.2} position={[-5, 2, -1]} rotation={[0, Math.PI / 3, 0]} scale={[2, 6, 1]} color="#ffb347" />
-            <Lightformer intensity={0.9} position={[5, 2, 1]} rotation={[0, -Math.PI / 3, 0]} scale={[3, 6, 1]} color="#eef3fa" />
-            <Lightformer intensity={0.25} position={[0, -4, 2]} scale={[7, 2, 1]} color="#7a4a12" />
+            <Lightformer intensity={0.9} position={[0, 1.5, 6]} scale={[8, 5, 1]} color="#fff4e6" />
+            <Lightformer intensity={1.0} position={[0, 5, 3]} scale={[7, 2, 1]} color="#fff4e6" />
+            <Lightformer intensity={1.4} position={[-5, 2, -1]} rotation={[0, Math.PI / 3, 0]} scale={[2, 6, 1]} color="#ffb347" />
+            <Lightformer intensity={1.1} position={[5, 2, 1]} rotation={[0, -Math.PI / 3, 0]} scale={[3, 6, 1]} color="#eef3fa" />
+            <Lightformer intensity={0.35} position={[0, -4, 2]} scale={[7, 2, 1]} color="#7a4a12" />
           </Environment>
 
           <Suspense fallback={null}>
