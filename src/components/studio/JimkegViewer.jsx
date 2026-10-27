@@ -4,7 +4,7 @@ import { useGLTF, OrbitControls, ContactShadows, Html, Environment, Lightformer 
 import * as THREE from 'three';
 import { priceFor, formatPrice } from '../../data/pricing';
 
-const MODEL_URL = '/models/jimkeg_v3.glb?v=7';
+const MODEL_URL = '/models/jimkeg_v3.glb?v=8';
 
 const FINISHES = {
   black: { label: 'Negro Stealth', color: '#1a1c21', roughness: 0.92, keepMap: false },
@@ -24,7 +24,8 @@ const PARTS = {
 // Desarme escalonado: cada pieza se mueve en su ventana del progreso global [a, b]
 const EXPLODE = {
   cap: { to: [0, 1.75, 0], win: [0, 0.5], spin: 0.6 },
-  cord: { to: [1.3, 1.35, 0.05], win: [0.1, 0.6] },
+  // Colgado del asa: sube y gira con la tapa, luego se suelta y queda de frente a la derecha
+  cord: { win: [0.5, 0.85], to: [1.3, 1.85, 0.06], toEulerBlender: [THREE.MathUtils.degToRad(-95), 0, 0], toScale: 0.95 },
   body: { to: [0, 1.25, 0], win: [0.2, 0.7] },
   // Sube recto fuera del bolsillo y luego se aparta; empieza cuando el cuerpo ya libero el hombro
   phone: { to: [-1.05, 0.15, 0.35], via: [0, 1.0, 0.12], win: [0.35, 1] },
@@ -32,7 +33,11 @@ const EXPLODE = {
   // se desliza a la derecha por delante de la funda y se levanta de frente
   strap: { win: [0.45, 1], fwd: [0, 0, 1.0], side: [1.2, 0, 0.92], up: [1.35, 1.185, -0.18], tilt: THREE.MathUtils.degToRad(78), shrink: 0.28 },
 };
-const EXPLODE_ONLY = new Set(['cord']);
+// glTF convierte Z-arriba (Blender) a Y-arriba: una rotacion de Blender R pasa a C·R·C^-1
+const Y_UP = new THREE.Quaternion().setFromEuler(new THREE.Euler(-Math.PI / 2, 0, 0));
+const fromBlender = ([x, y, z]) => Y_UP.clone().multiply(new THREE.Quaternion().setFromEuler(new THREE.Euler(x, y, z))).multiply(Y_UP.clone().invert());
+const CORD_TO_QUAT = fromBlender(EXPLODE.cord.toEulerBlender);
+const AXIS_Y = new THREE.Vector3(0, 1, 0);
 
 const SCALE_ASSEMBLED = 1.5;
 const SCALE_EXPLODED = 1.0;
@@ -72,7 +77,10 @@ function BottleModel({ activeColor, progressRef, hovered, selected, onHover, onS
       if (!kind) return;
       o.userData.kind = kind;
       if (!o.geometry.boundingBox) o.geometry.computeBoundingBox();
-      const entry = { node: o, kind, base: o.position.clone(), rotX: o.rotation.x, box: o.geometry.boundingBox.clone() };
+      const entry = {
+        node: o, kind, base: o.position.clone(), rotX: o.rotation.x,
+        baseQuat: o.quaternion.clone(), baseScale: o.scale.x, box: o.geometry.boundingBox.clone(),
+      };
       parts.push(entry);
       // La correa trae dos mallas (cinta y mosquetones): se enfoca la primera, la cinta
       if (!byKind[kind]) byKind[kind] = entry;
@@ -145,6 +153,8 @@ function BottleModel({ activeColor, progressRef, hovered, selected, onHover, onS
 
   const labelRef = useRef();
   const tmpV = useMemo(() => new THREE.Vector3(), []);
+  const tmpTo = useMemo(() => new THREE.Vector3(), []);
+  const tmpQ = useMemo(() => new THREE.Quaternion(), []);
   const smoothP = useRef(0);
 
   useFrame((_, delta) => {
@@ -155,12 +165,23 @@ function BottleModel({ activeColor, progressRef, hovered, selected, onHover, onS
       if (!cfg) continue;
       const k = windowed(p, cfg.win);
 
-      if (EXPLODE_ONLY.has(part.kind)) {
-        part.node.visible = k > 0.01;
-        part.node.scale.setScalar(Math.min(1, k * 5));
-      }
-      if (part.kind === 'cord') part.node.rotation.x = part.rotX + (Math.PI / 2) * k;
       if (part.kind === 'cap') part.node.rotation.y = cfg.spin * k;
+
+      if (part.kind === 'cord') {
+        // Tramo 1: atado a la tapa (misma subida y giro sobre el eje de la botella)
+        const kc = windowed(p, EXPLODE.cap.win);
+        const spin = EXPLODE.cap.spin * kc;
+        tmpQ.setFromAxisAngle(AXIS_Y, spin);
+        tmpV.copy(part.base).applyQuaternion(tmpQ);
+        tmpV.y += EXPLODE.cap.to[1] * kc;
+        part.node.quaternion.copy(tmpQ).multiply(part.baseQuat);
+        // Tramo 2: se suelta hacia su sitio
+        tmpV.lerp(tmpTo.fromArray(cfg.to), k);
+        part.node.position.copy(tmpV);
+        part.node.quaternion.slerp(CORD_TO_QUAT, k);
+        part.node.scale.setScalar(THREE.MathUtils.lerp(part.baseScale, cfg.toScale, k));
+        continue;
+      }
 
       if (part.kind === 'strap') {
         const t = THREE.MathUtils.clamp((p - cfg.win[0]) / (cfg.win[1] - cfg.win[0]), 0, 1);

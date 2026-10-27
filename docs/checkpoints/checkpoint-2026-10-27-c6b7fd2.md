@@ -1,0 +1,117 @@
+﻿# Checkpoint: Spain - 2026-10-27
+
+**Commit:** c6b7fd2 - feat: visor 3D interactivo, video de despiece y optimizacion de carga
+**Autor:** Samael2626
+**Timestamp:** 2026-10-27 13:10
+
+## Archivos modificados
+- .gitignore
+- design-assets/images/3D/Jimkeg_Bottle_Textured.glb
+- design-assets/images/3D/Meshy_AI_Black_Tactical_Lid_1026064340_generate.glb
+- design-assets/images/3D/Meshy_AI_Cell_Phone_1026064549_generate.glb
+- design-assets/images/3D/Meshy_AI_Cylindrical_Bottle_Bo_1026064515_generate.glb
+- design-assets/images/3D/Meshy_AI_Paracord_Gasket_Braid_1026064458_generate.glb
+- design-assets/images/3D/Meshy_AI_Tactical_Camouflage_P_1026064538_generate.glb
+- design-assets/images/3D/Meshy_AI_Tactical_Strap_1026064645_generate.glb
+- design-assets/images/3D/Meshy_AI_Urban_Camo_Hydration__1026064237_generate.glb
+- design-assets/images/3D/jimkeg_exploded_render.png
+- design-assets/images/3D/jimkeg_studio_render.png
+- design-assets/images/3D/previews/Meshy_AI_Black_Tactical_Lid_1026064340_generate.png
+- design-assets/images/3D/previews/Meshy_AI_Cell_Phone_1026064549_generate.png
+- design-assets/images/3D/previews/Meshy_AI_Cylindrical_Bottle_Bo_1026064515_generate.png
+- design-assets/images/3D/previews/Meshy_AI_Paracord_Gasket_Braid_1026064458_generate.png
+- design-assets/images/3D/previews/Meshy_AI_Tactical_Camouflage_P_1026064538_generate.png
+- design-assets/images/3D/previews/Meshy_AI_Tactical_Strap_1026064645_generate.png
+- design-assets/images/3D/previews/Meshy_AI_Urban_Camo_Hydration__1026064237_generate.png
+- design-assets/images/3D/previews/lid_front_view.png
+- design-assets/images/3D/previews/part_body.png
+- design-assets/images/3D/previews/part_lid.png
+- design-assets/images/3D/previews/part_paracord.png
+- design-assets/images/3D/previews/part_phone.png
+- design-assets/images/3D/previews/part_sleeve.png
+- design-assets/images/3D/previews/part_strap.png
+- design-assets/images/3D/previews/sleeve_front_view.png
+- design-assets/images/3D/previews/test_concentric_assembly.png
+- design-assets/images/3D/previews/test_lid_position.png
+- design-assets/images/3D/previews/test_perfect_fit.png
+- design-assets/images/3D/previews/test_phone_flat_in_pocket.png
+- design-assets/images/3D/previews/test_phone_in_pocket.png
+- design-assets/images/3D/previews/test_raw_assembly.png
+- design-assets/images/3D/previews/test_sleeve_phone_lid.png
+- design-assets/images/3D/test_cam_render.png
+- design-assets/images/3D/test_meshy_full.png
+- design-assets/images/3D/test_opt_export.glb
+- design-assets/images/Exploded_view_of_tactical_water_20261026005725.jpg
+- design-assets/images/Exploded_view_of_tactical_water_20261026011602.jpg
+- design-assets/images/gym-lifestyle.jpg
+- design-assets/images/hero-mountain.jpg
+- design-assets/images/jimkeg-exploded-concept.png
+- design-assets/images/meshy-ref-3quarter.jpg
+- design-assets/images/meshy-ref-exploded.jpg
+- design-assets/images/meshy-ref-front.jpg
+- design-assets/images/parts-exploded.jpg
+- design-assets/images/parts/part_01_tactical_lid.jpg
+- design-assets/images/parts/part_01_tactical_lid.png
+- design-assets/images/parts/part_02_paracord_cord.jpg
+- design-assets/images/parts/part_02_paracord_cord.png
+- design-assets/images/parts/part_03_bottle_body.jpg
+- design-assets/images/parts/part_03_bottle_body.png
+- design-assets/images/parts/part_04_camo_pouch.jpg
+- design-assets/images/parts/part_04_camo_pouch.png
+- design-assets/images/parts/part_05_cell_phone.jpg
+- design-assets/images/parts/part_05_cell_phone.png
+- design-assets/images/parts/part_06_tactical_strap.jpg
+- design-assets/images/parts/part_06_tactical_strap.png
+- design-assets/images/studio-black.jpg
+- design-assets/images/studio-camo.jpg
+- design-assets/images/textures/camo_arctic_diffuse.png
+- design-assets/images/textures/camo_arctic_roughness.png
+- design-assets/images/textures/camo_urban_diffuse.png
+- design-assets/images/textures/fabric_normal.png
+- design-assets/images/textures/paracord_normal.png
+- design-assets/images/textures/phone_screen.png
+- design-assets/images/textures/polymer_bump.png
+- design-assets/models/jimkeg_complete.glb
+- design-assets/models/jimkeg_interactive.glb
+- design-assets/models/jimkeg_parts.glb
+- docs/checkpoints/checkpoint-2026-10-26-c5d81d6.md
+- index.html
+- package-lock.json
+- package.json
+- public/images/3D/Jimkeg_Bottle_Master.blend
+- public/images/3D/Jimkeg_Bottle_Master.blend1
+- public/images/gym-lifestyle.webp
+- public/images/hero-mountain-768.webp
+- public/images/hero-mountain.webp
+- public/images/jimkeg-exploded-concept.webp
+- public/images/studio-black.webp
+- public/images/studio-camo.webp
+- public/images/textures/camo_arctic_diffuse.png
+- public/models/jimkeg_interactive.glb
+- public/models/jimkeg_v3.glb
+- public/videos/jimkeg_desarme.mp4
+- public/videos/jimkeg_desarme.webm
+- public/videos/jimkeg_desarme_poster.jpg
+- public/videos/jimkeg_desarme_poster.webp
+- src/App.jsx
+- src/components/3d/BottleModel.jsx
+- src/components/studio/ElementraStudio.jsx
+- src/components/studio/JimkegViewer.jsx
+- src/components/ui/BuyBoxModal.jsx
+- src/components/ui/EditorialGallery.jsx
+- src/components/ui/HeroSection.jsx
+- src/components/ui/Navigation.jsx
+- src/components/ui/ProductQuestions.jsx
+- src/components/ui/PromoPreviewPopup.jsx
+- src/components/ui/PruebaSection.jsx
+- src/components/ui/StickyBar.jsx
+- src/components/ui/UseCasesSection.jsx
+- src/data/pricing.js
+- src/hooks/useScrolledPast.js
+- src/index.css
+- vercel.json
+
+## Estado del proyecto
+- Pendiente: (completar manualmente)
+- Bloqueos: (completar manualmente)
+- Proxima accion: (completar manualmente)
