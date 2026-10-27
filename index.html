@@ -9,7 +9,12 @@
     <!-- Modern Luxury Athletic & Industrial Design Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Imagen del hero (LCP): se pide en paralelo con el JS -->
+    <link rel="preload" as="image" href="/images/hero-mountain.webp" imagesrcset="/images/hero-mountain-768.webp 768w, /images/hero-mountain.webp 1376w" imagesizes="100vw" fetchpriority="high">
+    <!-- Fuentes sin bloquear el primer pintado -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap"></noscript>
   </head>
   <body>
     <div id="root"></div>

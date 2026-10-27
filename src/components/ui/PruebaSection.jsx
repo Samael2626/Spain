@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Plus, Minus, Layers, Smartphone, Check, Droplets, MoveUpRight } from 'lucide-react';
 import { sound } from '../../audio/soundFx';
-import { PACK_PRICES, formatPrice } from '../../data/pricing';
+import { MAX_QUANTITY, priceFor, formatPrice } from '../../data/pricing';
 
 export default function PruebaSection({
   selectedColor = 'camo',
@@ -9,12 +9,12 @@ export default function PruebaSection({
   onOpenPack = () => {},
 }) {
   const [quantity, setQuantity] = useState(1);
-  const currentPrice = PACK_PRICES[quantity];
+  const currentPrice = priceFor(quantity);
 
   const currentPhoto =
     selectedColor === 'camo'
-      ? '/images/studio-camo.jpg'
-      : '/images/studio-black.jpg';
+      ? '/images/studio-camo.webp'
+      : '/images/studio-black.webp';
 
   return (
     <section className="prueba-section" id="prueba">
@@ -110,9 +110,9 @@ export default function PruebaSection({
                 className="step-btn"
                 onClick={() => {
                   sound.playClick();
-                  setQuantity((q) => Math.min(3, q + 1));
+                  setQuantity((q) => Math.min(MAX_QUANTITY, q + 1));
                 }}
-                disabled={quantity >= 3}
+                disabled={quantity >= MAX_QUANTITY}
                 aria-label="Aumentar cantidad"
               >
                 <Plus size={16} />

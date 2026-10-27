@@ -34,7 +34,7 @@ export default function PromoPreviewPopup({ onClose, onBrowseOffers }) {
   return (
     <div className="promo-preview-backdrop" onMouseDown={onClose}>
       <div ref={dialogRef} className="promo-preview-dialog" role="dialog" aria-modal="true" aria-labelledby="promo-preview-title" onMouseDown={(event) => event.stopPropagation()}>
-        <div className="promo-preview-photo"><img src="/images/studio-camo.jpg" alt="JIMKEG Camuflaje gris con funda y correa" /></div>
+        <div className="promo-preview-photo"><img src="/images/studio-camo.webp" alt="JIMKEG Camuflaje gris con funda y correa" /></div>
         <div className="promo-preview-content">
         <button type="button" className="promo-preview-close" onClick={onClose} aria-label="Cerrar promoción de ejemplo"><X size={21} aria-hidden="true" /></button>
         <span className="promo-preview-eyebrow">PROMOCIÓN DE BIENVENIDA</span>

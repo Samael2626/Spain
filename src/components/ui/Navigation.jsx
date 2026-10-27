@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tag, Volume2, VolumeX } from 'lucide-react';
+import { ShoppingBag, Volume2, VolumeX } from 'lucide-react';
 import { sound } from '../../audio/soundFx';
 
 export default function Navigation({
@@ -41,15 +41,15 @@ export default function Navigation({
           </button>
 
           <button
-            className="nav-offer-btn"
-            aria-label="Ver ofertas"
+            className="nav-offer-btn nav-buy-btn"
+            aria-label="Comprar JIMKEG"
             onClick={() => {
               sound.playClick();
               onOpenOffers();
             }}
           >
-            <Tag size={18} />
-            <span className="offer-nav-text">VER OFERTAS</span>
+            <ShoppingBag size={19} aria-hidden="true" />
+            <span className="offer-nav-text">COMPRAR</span>
           </button>
         </div>
       </div>

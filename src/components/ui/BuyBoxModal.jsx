@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Check, ArrowRight, ArrowLeft, ShieldCheck, Truck, X } from 'lucide-react';
+import { Check, ArrowRight, ArrowLeft, ShieldCheck, Truck, X, Plus, Minus } from 'lucide-react';
 import { sound } from '../../audio/soundFx';
-import { PACK_PRICES, formatPrice } from '../../data/pricing';
+import { MAX_QUANTITY, priceFor, formatPrice } from '../../data/pricing';
 
 const packs = [
   { quantity: 1, label: 'Una unidad' },
@@ -9,15 +9,32 @@ const packs = [
   { quantity: 3, label: 'Pack de tres' },
 ];
 
+const packLabel = (q) => packs.find((p) => p.quantity === q)?.label ?? `${q} unidades`;
+
+function QuantityStepper({ quantity, onChange }) {
+  return (
+    <div className="offer-stepper" role="group" aria-label="Cantidad">
+      <button type="button" aria-label="Reducir cantidad" disabled={quantity <= 1} onClick={() => { sound.playClick(); onChange(quantity - 1); }}>
+        <Minus size={15} />
+      </button>
+      <span aria-live="polite">{quantity}</span>
+      <button type="button" aria-label="Aumentar cantidad" disabled={quantity >= MAX_QUANTITY} onClick={() => { sound.playClick(); onChange(quantity + 1); }}>
+        <Plus size={15} />
+      </button>
+    </div>
+  );
+}
+
 export default function BuyBoxModal({
   isOpen = false,
   onClose = () => {},
   selectedColor = 'camo',
   initialQuantity = 1,
+  initialStep = 'config',
   onColorChange = () => {},
 }) {
-  const [step, setStep] = useState('config'); // 'config' | 'shipping' | 'confirmed'
-  const [quantity, setQuantity] = useState(Math.min(3, Math.max(1, initialQuantity)));
+  const [step, setStep] = useState(initialStep); // 'config' | 'shipping' | 'confirmed'
+  const [quantity, setQuantity] = useState(Math.min(MAX_QUANTITY, Math.max(1, initialQuantity)));
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -67,7 +84,7 @@ export default function BuyBoxModal({
   if (!isOpen) return null;
 
   const finish = selectedColor === 'camo' ? 'Camuflaje gris' : 'Negro Stealth';
-  const image = selectedColor === 'camo' ? '/images/studio-camo.jpg' : '/images/studio-black.jpg';
+  const image = selectedColor === 'camo' ? '/images/studio-camo.webp' : '/images/studio-black.webp';
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -142,22 +159,26 @@ export default function BuyBoxModal({
                         {quantity === packQuantity && <Check size={16} aria-hidden="true" />}
                         {label}
                       </span>
-                      <span className="offer-pack-price">{formatPrice(PACK_PRICES[packQuantity])}</span>
+                      <span className="offer-pack-price">{formatPrice(priceFor(packQuantity))}</span>
                     </button>
                   ))}
+                </div>
+                <div className="offer-more-row">
+                  <span>¿Más unidades? <small>Se combinan packs de 3</small></span>
+                  <QuantityStepper quantity={quantity} onChange={setQuantity} />
                 </div>
               </div>
 
               <div className="offer-total">
                 <span>PRECIO FINAL</span>
-                <strong>{formatPrice(PACK_PRICES[quantity])}</strong>
+                <strong>{formatPrice(priceFor(quantity))}</strong>
               </div>
 
               <button
                 className="offer-checkout active"
                 onClick={() => { sound.playClick(); setStep('shipping'); }}
               >
-                TRAMITAR PEDIDO · {formatPrice(PACK_PRICES[quantity])} <ArrowRight size={17} aria-hidden="true" />
+                TRAMITAR PEDIDO · {formatPrice(priceFor(quantity))} <ArrowRight size={17} aria-hidden="true" />
               </button>
 
               <div className="offer-trust-badges">
@@ -181,8 +202,9 @@ export default function BuyBoxModal({
               <h2 id="offer-title">Dirección de Envío</h2>
 
               <div className="checkout-summary-pill">
-                <span>{packs.find((p) => p.quantity === quantity)?.label} ({finish})</span>
-                <strong>{formatPrice(PACK_PRICES[quantity])}</strong>
+                <span>{packLabel(quantity)} ({finish})</span>
+                <QuantityStepper quantity={quantity} onChange={setQuantity} />
+                <strong>{formatPrice(priceFor(quantity))}</strong>
               </div>
 
               <form onSubmit={handleConfirmOrder} className="checkout-form">
@@ -286,7 +308,7 @@ export default function BuyBoxModal({
                 </div>
 
                 <button type="submit" className="offer-checkout active">
-                  CONFIRMAR PEDIDO — {formatPrice(PACK_PRICES[quantity])}
+                  CONFIRMAR PEDIDO — {formatPrice(priceFor(quantity))}
                 </button>
 
                 <p className="offer-disclosure">
@@ -312,11 +334,11 @@ export default function BuyBoxModal({
               <div className="order-details-box">
                 <div className="order-line">
                   <span>Producto:</span>
-                  <strong>{packs.find((p) => p.quantity === quantity)?.label} ({finish})</strong>
+                  <strong>{packLabel(quantity)} ({finish})</strong>
                 </div>
                 <div className="order-line">
                   <span>Importe total:</span>
-                  <strong>{formatPrice(PACK_PRICES[quantity])}</strong>
+                  <strong>{formatPrice(priceFor(quantity))}</strong>
                 </div>
                 <div className="order-line">
                   <span>Envío a:</span>

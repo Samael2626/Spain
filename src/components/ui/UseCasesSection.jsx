@@ -6,14 +6,14 @@ const scenes = [
     index: '01',
     title: 'EN EL GIMNASIO',
     text: 'Bolsillo frontal para llevar el móvil junto a la botella. Correa para transportarla entre sesiones.',
-    image: '/images/gym-lifestyle.jpg',
+    image: '/images/gym-lifestyle.webp',
     alt: 'Botella JIMKEG negra colgada en un gimnasio',
   },
   {
     index: '02',
     title: 'EN LA MONTAÑA',
     text: 'Dos acabados y 2,2 L de capacidad en una botella con funda y correa de hombro.',
-    image: '/images/hero-mountain.jpg',
+    image: '/images/hero-mountain.webp',
     alt: 'Botellas JIMKEG Camuflaje gris y Negro Stealth en la montaña',
   },
 ];

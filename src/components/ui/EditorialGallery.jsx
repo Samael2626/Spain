@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import ExplodedDetailPanel from './ExplodedDetailPanel';
 
 const images = [
-  { src: '/images/studio-camo.jpg', alt: 'JIMKEG Camuflaje gris con funda y correa', label: 'CAMUFLAJE GRIS', index: '01', color: 'camo' },
-  { src: '/images/studio-black.jpg', alt: 'JIMKEG Negro Stealth con bolsillo frontal', label: 'NEGRO STEALTH', index: '02', color: 'black' },
+  { src: '/images/studio-camo.webp', alt: 'JIMKEG Camuflaje gris con funda y correa', label: 'CAMUFLAJE GRIS', index: '01', color: 'camo' },
+  { src: '/images/studio-black.webp', alt: 'JIMKEG Negro Stealth con bolsillo frontal', label: 'NEGRO STEALTH', index: '02', color: 'black' },
 ];
 
 export default function EditorialGallery({ onSelectColor = () => {} }) {
@@ -36,7 +36,7 @@ export default function EditorialGallery({ onSelectColor = () => {} }) {
         ))}
         <div className="gallery-detail-card">
           <button type="button" className="gallery-detail-trigger" onClick={() => setDetailOpen((open) => !open)} aria-expanded={detailOpen} aria-controls="despiece">
-            <img src="/images/jimkeg-exploded-concept.png" alt="" loading="lazy" decoding="async" />
+            <img src="/images/jimkeg-exploded-concept.webp" alt="" loading="lazy" decoding="async" />
             <span className="gallery-detail-copy">
               <span>03 / DESPIECE</span>
               <strong>VISTA DE<br />DETALLE</strong>

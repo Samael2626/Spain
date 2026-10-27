@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Fuentes Blender pesadas (no se despliegan)
+blender/
+*.blend1

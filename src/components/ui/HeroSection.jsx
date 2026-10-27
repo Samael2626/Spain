@@ -10,7 +10,15 @@ export default function HeroSection({
   return (
     <section className="hero-editorial-section" id="hero" aria-labelledby="hero-title">
       <div className="hero-backdrop-image" aria-hidden="true">
-        <img src="/images/hero-mountain.jpg" alt="" className="hero-img-cover" fetchPriority="high" />
+        <img
+          src="/images/hero-mountain.webp"
+          srcSet="/images/hero-mountain-768.webp 768w, /images/hero-mountain.webp 1376w"
+          sizes="100vw"
+          alt=""
+          className="hero-img-cover"
+          fetchPriority="high"
+          decoding="async"
+        />
         <div className="hero-vignette-overlay" />
       </div>
 

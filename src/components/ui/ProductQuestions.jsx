@@ -13,7 +13,7 @@ const questions = [
   },
   {
     question: '¿Cómo funcionan los packs?',
-    answer: 'Puedes configurar 1, 2 o 3 unidades. El precio de cada pack aparece antes de continuar.',
+    answer: 'Puedes pedir de 1 a 10 unidades. Hay packs de 1, 2 y 3; a partir de 4 se combinan packs de 3 y el precio final aparece antes de continuar.',
   },
   {
     question: '¿Puedo completar la compra ahora?',

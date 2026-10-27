@@ -1,25 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Tag, ArrowUpRight } from 'lucide-react';
 import { sound } from '../../audio/soundFx';
+import useScrolledPast from '../../hooks/useScrolledPast';
 
 export default function StickyBar({
   selectedColor = 'camo',
   onOpenOffers = () => {},
 }) {
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      // Appear after scrolling down past the initial hero
-      if (window.scrollY > 400) {
-        setVisible(true);
-      } else {
-        setVisible(false);
-      }
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const visible = useScrolledPast();
 
   if (!visible) return null;
 
